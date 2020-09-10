@@ -1,41 +1,30 @@
+import requests
 
-print("""
-What do You want to convert for ? """)
-enter_what_to_convert = print("""
-1. Rupee to Doller
-2. Doller to Rupee
-3. Exit""")
-option = int(input("Select option : "))
-if option == 3:
-    exit() 
-else:
-    amount = int(input("Enter the amount to convert : "))
+def getExchangeRate(fromCurrency,toCurrency):
+    # fromCurrency="USD"
+    # toCurrency="INR"
+    url="https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency="+fromCurrency+"&to_currency="+toCurrency+"&apikey=LSMFUIUCI1F12AK5"
+    result = requests.get(url)
+    result=result.json()
+    exchangeRate=result['Realtime Currency Exchange Rate']['5. Exchange Rate']
+    exchangeRate = float(exchangeRate)
+    return exchangeRate
 
+def takeInput():
+    print("---------Welcome to Abhishek's Currency Exchanges------------")
+    print("Select option:")
+    print("1. Go to currency converter")
+    print("2. Exit")
+    option = int(input("Select option : "))
 
-# def rupeeToDollerConverter(dollerAmount):
-    dollerAmount = float(amount/73.89)
-# return
-
-
-# def dollerToRupeeConverter(rupeeAmount):
-    rupeeAmount = float(amount*73.89)
-    # return rupeeAmount
-            
-    
-# def options():
-    if option == 3:
-        quit()
-    elif option == 1:
-        print(f"The Doller Value of {amount} is : {dollerAmount}")
-    elif option == 2:
-        print(f"The Rupee Value of {amount} is : {rupeeAmount}")
+    if option == 2:
+        exit() 
     else:
-        print("Enter Valid Option!!")
+        print("\neg (INR,USD,JPY etc...)\n")
+        fromCurrency=input("From which currency do you want to convert: ")
+        toCurrency=input("To which currency do you want to convert: ")
+        amount=float(input("Amount: "))
+        exchangeRate=getExchangeRate(fromCurrency,toCurrency)
+        print(exchangeRate*amount)
 
-
-# rupeeToDollerConverter()
-# dollerToRupeeConverter()
-# options()
-
-                
-
+takeInput()
