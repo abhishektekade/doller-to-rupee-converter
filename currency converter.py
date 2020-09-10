@@ -11,7 +11,7 @@ def getExchangeRate(fromCurrency,toCurrency):
     return exchangeRate
 
 def takeInput():
-    print("---------Welcome to Abhishek's Currency Exchanges------------")
+    print("---------Welcome to Currency Exchanges!!------------")
     print("Select option:")
     print("1. Go to currency converter")
     print("2. Exit")
